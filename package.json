@@ -1,0 +1,22 @@
+{
+  "name": "smsend",
+  "version": "1.0.0",
+  "description": "Simple API to easily send SMS",
+  "main": "src/index.mjs",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "dev": "node --watch ./src/index.js"
+  },
+  "keywords": [],
+  "author": {
+    "email": "andre@afmelo.com",
+    "name": "Andre Melo",
+    "url": "https://afmelo.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
