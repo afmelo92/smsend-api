@@ -11,7 +11,7 @@ on:
 
 env:
   REGISTRY: docker.pkg.github.com
-  REPO: afmelo92/smsend-api/smsend-api-image
+  REPO: afmelo92/smsend-api
   CONTAINER: smsend-api-image
 
 jobs:
