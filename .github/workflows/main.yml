@@ -16,6 +16,7 @@ env:
 
 jobs:
   push_to_registry:
+    permissions: write-all
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
