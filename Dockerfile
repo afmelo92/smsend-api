@@ -11,14 +11,14 @@ ENV NODE_ENV production
 WORKDIR /usr/src/app
 
 # Copy app files
-COPY --chown=node:node . /usr/src/app
+COPY --chown=webmaster:webmaster . /usr/src/app
 
 # Install dependencies using pnpm
 RUN npm install -g pnpm && \
     pnpm install
 
 # friends don’t let friends run containers as root!
-USER node
+USER webmaster
 
 # Expose the port your app runs on
 EXPOSE 8080
