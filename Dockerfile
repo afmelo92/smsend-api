@@ -7,11 +7,11 @@ RUN apk add dumb-init
 # Optimise for production
 ENV NODE_ENV production
 
-# Create app directory
-WORKDIR /usr/src/app
-
 # Copy app files
 COPY --chown=webmaster:webmaster . /usr/src/app
+
+# Create app directory
+WORKDIR /usr/src/app
 
 # Install dependencies using pnpm
 RUN npm install -g pnpm && \
