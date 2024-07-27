@@ -26,4 +26,4 @@ EXPOSE 8080
 WORKDIR /usr/src/app/src
 
 # Command to run the application
-CMD ["dumb-init", "node", "index.mjs" ]
+CMD ["dumb-init", "node", "index.js" ]
