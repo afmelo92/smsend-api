@@ -15,7 +15,7 @@ COPY --chown=node:node . /usr/src/app
 
 # Install dependencies using pnpm
 RUN npm install -g pnpm && \
-    pnpm install
+    pnpm install && pnpm build
 
 # friends don’t let friends run containers as root!
 USER node
@@ -23,7 +23,7 @@ USER node
 # Expose the port your app runs on
 EXPOSE 8080
 
-WORKDIR /usr/src/app/src
+WORKDIR /usr/src/app/dist
 
 # Command to run the application
 CMD ["dumb-init", "node", "index.js" ]
