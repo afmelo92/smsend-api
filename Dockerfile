@@ -4,9 +4,6 @@ FROM node:lts-alpine
 # Add tool which will fix init process
 RUN apk add dumb-init
 
-# Optimise for production
-ENV NODE_ENV production
-
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -16,6 +13,9 @@ COPY --chown=node:node . /usr/src/app
 # Install dependencies using pnpm
 RUN npm install -g pnpm && \
     pnpm install && pnpm build
+
+# Optimise for production
+ENV NODE_ENV production
 
 # friends don’t let friends run containers as root!
 USER node
