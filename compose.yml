@@ -1,0 +1,23 @@
+version: '3'
+name: smsend
+services:
+  api:
+    container_name: smsend_api
+    depends_on:
+      - db
+    build: .
+    ports:
+      - '80:8080'
+  db:
+    container_name: smsend_pg_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_pg_data:/etc/smsend/db_pg_data
+volumes:
+  db_pg_data:
+    name: smsend_pg_db_data

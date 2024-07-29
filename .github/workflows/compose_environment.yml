@@ -1,0 +1,45 @@
+name: Build, Push and Deploy SMSend Compose Environment
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push events but only for the master branch
+  push:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  GITHUB_USER: afmelo92
+  GITHUB_REPOSITORY: smsend-api
+
+jobs:
+  deploy:
+    name: Deploy to DigitalOcean
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH connection
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Clone project repository into droplet
+        run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git"
+
+      - name: Stop all deployed containers
+        continue-on-error: true
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker stop $(docker ps -a -q)"
+
+      - name: Remove all deployed containers
+        continue-on-error: true
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker container prune"
+
+      - name: Start docker container environment
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose up -d --remove-orphans"
+
