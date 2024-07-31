@@ -27,7 +27,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Clone project repository into droplet
-        working-directory: /usr/src/app
+        working-directory: /usr/src
         shell: bash
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git"
@@ -43,7 +43,7 @@ jobs:
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker container prune -f"
 
       - name: Start docker container environment
-        working-directory: /usr/src/app
+        working-directory: /usr/src/${{GITHUB_REPOSITORY}}
         shell: bash
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose up -d --remove-orphans"
