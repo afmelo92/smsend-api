@@ -30,7 +30,7 @@ jobs:
         working-directory: /usr/src
         shell: bash
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git /usr/src"
 
       - name: Stop all deployed containers
         continue-on-error: true
