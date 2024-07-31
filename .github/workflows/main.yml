@@ -43,7 +43,7 @@ jobs:
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker container prune -f"
 
       - name: Start docker container environment
-        working-directory: /usr/src/${{GITHUB_REPOSITORY}}
+        working-directory: /usr/src/smsend-api
         shell: bash
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose up -d --remove-orphans"
