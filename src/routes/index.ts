@@ -10,7 +10,7 @@ router.use(usersRouter);
 router.use(smsRouter);
 
 router.use('/', (req, res) => {
-  res.json({ message: 'Welcome to SMSend!' });
+  res.json({ message: 'Welcome to SMSend Online!' });
 });
 
 export default router;
