@@ -46,5 +46,5 @@ jobs:
         working-directory: /usr/src/app
         shell: bash
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose up -d --remove-orphans"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml up -d --remove-orphans"
 
