@@ -27,7 +27,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Clone project repository into droplet
-        run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git /usr/src/app"
+        run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "cd /usr/src/app && git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git ."
 
       - name: Stop all deployed containers
         continue-on-error: true
