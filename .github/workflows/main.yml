@@ -39,7 +39,7 @@ jobs:
       - name: Stop all deployed containers running app shell script
         continue-on-error: true
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "./usr/src/app/init.sh"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "/usr/src/app/init.sh"
 
       - name: Remove all deployed containers
         continue-on-error: true
