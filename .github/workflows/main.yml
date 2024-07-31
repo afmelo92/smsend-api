@@ -46,6 +46,11 @@ jobs:
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker container prune -f"
 
+      - name: Remove all images
+        continue-on-error: true
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker image prune -a --force"
+
       - name: Start docker container environment
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml up -d --remove-orphans"
