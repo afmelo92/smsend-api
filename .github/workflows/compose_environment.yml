@@ -30,7 +30,7 @@ jobs:
         working-directory: /usr/src
         shell: bash
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git /usr/src"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/${{env.GITHUB_USER}}/${{env.GITHUB_REPOSITORY}}.git /usr/src/app"
 
       - name: Stop all deployed containers
         continue-on-error: true
@@ -43,7 +43,7 @@ jobs:
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker container prune -f"
 
       - name: Start docker container environment
-        working-directory: /usr/src/smsend-api
+        working-directory: /usr/src/app
         shell: bash
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose up -d --remove-orphans"
