@@ -1,8 +1,5 @@
-import pg from 'pg';
-const { Pool } = pg;
+import { PrismaClient } from '@prisma/client';
 
-const pool = new Pool();
+const prisma = new PrismaClient();
 
-export const query = (text: string, params: never, callback: () => null) => {
-  return pool.query(text, params, callback);
-};
+export default prisma;

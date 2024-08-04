@@ -8,7 +8,7 @@ function errorHandler(
   next: NextFunction,
 ) {
   console.log('### Error handler');
-  console.log(error);
+  console.error(error);
   response.sendStatus(500);
 }
 
