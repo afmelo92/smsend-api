@@ -71,5 +71,5 @@ jobs:
 
       - name: Start docker container environment
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml up -d --remove-orphans --verbose"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml --verbose up -d --remove-orphans"
 
