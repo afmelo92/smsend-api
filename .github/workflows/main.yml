@@ -57,6 +57,18 @@ jobs:
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "echo "$ENV_FILE" > /usr/src/app/.env"
 
+      - name: Build and inject prisma db url
+        env:
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        run: |
+          DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}?schema=public"
+
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "echo "DATABASE_URL=${DATABASE_URL}" >> /usr/src/app/.env"
+
       - name: Start docker container environment
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml up -d --remove-orphans"
