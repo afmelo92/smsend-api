@@ -77,5 +77,5 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml --env-file .env --verbose up -d --remove-orphans"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker compose -f /usr/src/app/compose.yml --env-file /usr/src/app/.env --verbose up -d --remove-orphans"
 
