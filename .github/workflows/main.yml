@@ -50,6 +50,12 @@ jobs:
         continue-on-error: true
         run: |
           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker image prune -a --force"
+      
+      - name: Inject environment variables
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "echo ${{ secrets.ENV_FILE }} > /usr/src/app/.env"
 
       - name: Start docker container environment
         run: |
